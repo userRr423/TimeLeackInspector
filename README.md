@@ -13,5 +13,5 @@
 <li> Документирование данных при работе с установленным набором программ </li>
 
 <p align="center">
-<img src="https://github.com/userRr423/TimeLeackInspector/blob/main/SimpleLogo.png?raw=true" alt="Описание изображения" width="900" height="500"/>
+<img src="https://github.com/userRr423/TimeLeackInspector/blob/main/SimpleLogo.png?raw=true" alt="Описание изображения" width="600" height="200"/>
 </p>
