@@ -1,0 +1,84 @@
+version: '2.4'
+services:
+  nginx:
+    container_name: tli-nginx
+    hostname: tli-nginx
+    image: nginx:latest
+    user: www-data:www-data
+    volumes:
+      - ./deploy/logs/nginx:/var/log/nginx
+      - ./deploy/conf/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./deploy/conf/nginx/sites-enabled:/etc/nginx/sites-enabled:ro
+      - ./deploy/conf/nginx/ssl:/etc/nginx/ssl:ro
+      - ./www:/var/www/tli
+    ports:
+      - "80:80"
+    links:
+      - php-fpm
+    restart: always
+    networks:
+      default:
+        ipv4_address: 172.16.1.4
+
+  php-fpm:
+    container_name: tli-php-fpm
+    hostname: tli-php-fpm
+    build: ./deploy/build/php-fpm
+    user: www-data:www-data
+    volumes:
+      - ./deploy/conf/php/php-fpm.conf:/usr/local/etc/php-fpm.conf:ro
+      - ./deploy/conf/php/tli.conf:/usr/local/etc/php-fpm.d/tli.conf:ro
+      - ./deploy/conf/php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+      - ./deploy/logs/php:/var/log/php
+      - ./www:/var/www/tli
+    networks:
+      default:
+        ipv4_address: 172.16.1.5
+    cap_add:
+      - SYS_NICE
+      - DAC_READ_SEARCH
+    restart: always
+
+  mysql:
+    container_name: tli-mysql
+    hostname: tli-mysql
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    user: 106:112
+    environment:
+      MYSQL_DATABASE: tli
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+    volumes:
+      - ./deploy/db/initdb.d:/docker-entrypoint-initdb.d
+      - db:/var/lib/mysql
+      - mysql-logs:/var/log/mysql
+      - ./deploy/conf/mysql/conf.d:/etc/mysql/conf.d:ro
+    networks:
+      default:
+        ipv4_address: 172.16.1.6
+    restart: always
+
+  adminer:
+    container_name: tli-adminer
+    hostname: tli-adminer
+    image: adminer
+    user: www-data:www-data
+    links:
+      - mysql
+    ports:
+      - 8080:8080
+    networks:
+      default:
+        ipv4_address: 172.16.1.7
+    restart: always
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.1.0/24
+  
+volumes:
+  db:
+  mysql-logs:

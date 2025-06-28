@@ -1,0 +1,339 @@
+body {
+    background-color: rgb(71, 217, 222);
+    margin: 0;
+}
+
+.button-in {
+    background-color: blue;
+    width: 200px;
+    height: 50px;
+    border-radius: 20px;
+    position: absolute;
+    left: 45%;
+    top: 45%;
+    margin: auto;
+    border: 0;
+}
+
+.logo-img {
+    position: absolute;
+    left: 36%;
+    top: 10%;
+}
+
+.refer {
+    color: aliceblue;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.registartion-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-registration {
+    width: 300px;
+    margin-left: 40%;
+    margin-top: 13%;
+}
+
+.registration-btn {
+    margin-top: 40px;
+    width: 300px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: blue;
+    font-weight: bold;
+    font-size: 20px;
+    color: aliceblue;
+    border: 0;
+}
+
+.registration-input {
+    border-radius: 20px;
+    height: 30px;
+    outline:none;
+    border: 0;
+}
+
+.text-registration {
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.not-found-img {
+    position: absolute;
+    left: 40%;
+    top: 5%;
+}
+
+.notFound {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.in-main-menu-btn {
+    position: absolute;
+    left: 44%;
+    margin-top: 40px;
+    width: 300px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: blue;
+    font-weight: bold;
+    font-size: 20px;
+    color: aliceblue;
+    border: 0;
+}
+
+.in-main-menu-btn:hover{
+    background-color: rgb(88, 88, 174);
+}
+
+.logo-img-menu {
+    position: absolute;
+    left: 44%;
+    top: 0;
+}
+
+.head {
+    display: flex;
+    background-color: rgb(102, 101, 99);
+    height: 40px;
+}
+
+.exit {
+    position: absolute;
+    right: 10px;
+    margin-top: 0;
+}
+
+.container {
+    display: flex;
+}
+
+.sideBar {
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    margin-left: 10px;
+    width: 290px;
+}
+
+.hiddenItem {
+    display: flex;
+    flex-direction: column;
+}
+
+.side-container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.choose-item {
+    display: flex;
+    background-color: blue;
+    margin-left: 10px;
+    width: 290px;
+    height: 40px;
+    margin-top: 2px;
+    border-radius: 10px;
+}
+
+.choose-item:hover {
+    background-color: rgb(59, 59, 198);
+}
+
+.choose-img-rotate {
+    margin-top: 8px;
+    margin-left: 110px;
+    transform: rotate(180deg);
+}
+
+.choose-img {
+    margin-top: 8px;
+    margin-left: 110px;
+    transform: rotate(0deg);
+}
+
+.choose-item p {
+    color: aliceblue;
+    margin-top: 8px;
+    margin-left: 5px;
+    font-weight: bold;
+    font-size: 20px;
+    width: 150px;
+}
+
+.panel {
+    width: 1200px;
+    background-color: aliceblue;
+    height: 50px;
+    margin-left: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.employee {
+    
+    background-color: rgb(250, 249, 248);
+    margin: 2px;
+    margin-left: 10px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 20px;
+    padding-left: 30px;
+    border: 1px solid rgb(0, 0, 0);
+    width: 1000px;
+}
+
+.employee-info {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    margin: 2px;
+    margin-left: 10px;
+    margin-bottom: 30px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 20px;
+    padding-left: 30px;
+    text-align: center;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.employee:hover {
+    background-color: rgb(175, 176, 178);
+}
+
+.panel-app {
+    display: flex;
+    width: 1200px;
+    height: 70px;
+    margin-left: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.about-employee {
+    background-color: rgb(194, 196, 197);
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+.about-employee:hover {
+    background-color: rgb(153, 153, 155);
+}
+
+.monitoring {
+    background-color: rgb(194, 196, 197);
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+.monitoring:hover {
+    background-color: rgb(153, 153, 155);
+}
+
+.l-empl {
+    margin-left: 40%;
+    margin-top: 5%;
+    margin-bottom: 5px;
+}
+
+.l-p {
+    margin-left: 40%;
+    margin-top: 2%;
+}
+
+.employee-info-panel {
+    display: block;
+}
+
+.monitoring-panel {
+    display: none;
+    flex-direction: column;
+}
+
+.choose-container {
+    display: flex;
+}
+
+.choose-row {
+    display: flex;
+    background-color: rgb(222, 234, 234);
+    margin: 3px;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    color: rgb(39, 83, 186);
+    
+    padding-top: 15px;
+}
+
+.choose-row p {
+    cursor: default;
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+.choose-row:hover {
+    background-color: rgb(174, 174, 177);
+}
+
+.last {
+    margin-bottom: 50px;
+}
+
+.round {
+    
+}
+
+.container-employee {
+    display: flex;
+}
+
+.online-employee {
+    margin-top: 10px;
+    color: green;
+    display: flex;
+    flex-direction: column;
+ 
+    right: 20px;
+}
+
+.online-employee-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.online-employee-not {
+   margin-top: 10px;
+    color: brown;
+    display: flex;
+    flex-direction: column;
+ 
+    right: 20px;
+}
+

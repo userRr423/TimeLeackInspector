@@ -1,0 +1,167 @@
+@startuml
+hide circle
+left to right direction
+
+entity  employee {
+    *id : integer <<PK>> <<NOT NULL>>\n<<AUTO_INCREMENT>>
+    --
+    +surname: varchar(64) <<NOT NULL>>
+    +name: varchar(32) <<NOT NULL>>
+    +middle_name: varchar(32)
+    +gender: bit(1) <<NOT NULL>>
+    +birth_date: date <<NOT NULL>>
+    +photo: mediumblob
+    +hiring_date: date <<NOT NULL>>
+    *position_id: integer <<FK>> <<NOT NULL>> 
+    *policy_id: integer <<FK>> <<NOT NULL>> 
+    +dismissal_date: date
+    +dismissal_reason: varchar(255)
+    +auth_token: bigint(20) unsigned <<UNIQUE>> <<NOT NULL>>
+    +login: varchar(50) <<UNIQUE>>
+    +password_hash: varchar(255)
+}
+
+entity position {
+    *id : integer <<PK>> <<NOT NULL>>\n<<AUTO_INCREMENT>>
+    --
+    +name: varchar(64) <<NOT NULL>>
+    *unit_id: integer <<FK>> <<NOT NULL>>
+}
+
+entity organizational_unit {
+    *id : integer <<PK>> <<NOT NULL>>\n<<AUTO_INCREMENT>>
+    --
+    *organization_id: integer <<FK>> <<NOT NULL>>
+    *higher_level_id: integer <<FK>>
+    *chief_id: integer <<FK>> <<UNIQUE>>\n<<NOT NULL>>
+    +name: varchar(255) <<NOT NULL>>
+    +start_time: time
+    +end_time: time
+}
+
+entity organization {
+    *id : integer <<PK>> <<NOT NULL>>\n<<AUTO_INCREMENT>>
+    --
+    +name: varchar(255) <<UNIQUE>>\n<<NOT NULL>>
+    +director: varchar(64) <<NOT NULL>>
+    +senior_accountant: varchar(64)\n<<NOT NULL>>
+    +start_time: time
+    +end_time: time  
+}
+
+entity activity {
+    *id : integer <<PK>> <<NOT NULL>>\n<<AUTO_INCREMENT>>
+    --
+    +name: varchar(255) <<UNIQUE>>\n<<NOT NULL>>
+    +description: text
+}
+
+entity actual_event {
+    *id : integer <<PK>> <<NOT NULL>>\n<<AUTO_INCREMENT>>
+    --
+    *session_id: integer <<FK>> <<NOT NULL>>
+    *event_id: integer <<FK>> <<NOT NULL>>
+    +start_datetime: datetime <<NOT NULL>>
+    +end_datetime: datetime <<NOT NULL>>
+    +description: text <<NOT NULL>>
+}
+
+entity scheduled_work {
+    *id : integer <<PK>> <<NOT NULL>>\n<<AUTO_INCREMENT>>
+    --
+    *employee_id: integer <<FK>> <<NOT NULL>>
+    *activity_id: integer <<FK>> <<NOT NULL>>
+    +start_date: date <<NOT NULL>>
+    +end_date: date <<NOT NULL>>
+    +week_day: smallint unsigned <<NOT NULL>>
+    +day_type: varchar(64) <<NOT NULL>>
+    +start_time: time <<NOT NULL>>
+    +end_time: time <<NOT NULL>>
+}
+
+entity event {
+    *id : integer <<PK>> <<NOT NULL>>\n<<AUTO_INCREMENT>>
+    --
+    +name: varchar(255) <<UNIQUE>>\n<<NOT NULL>>
+}
+
+entity session {
+    *id : integer <<PK>> <<NOT NULL>>\n<<AUTO_INCREMENT>>
+    --
+    *employee_id: integer <<FK>> <<NOT NULL>>
+    *eam_id: integer <<FK>> <<NOT NULL>>
+    *application_id: integer <<FK>>
+}
+
+entity application {
+    *id : integer <<PK>> <<NOT NULL>>\n<<AUTO_INCREMENT>>
+    --
+    +name: varchar(255) <<UNIQUE>>\n<<NOT NULL>>
+    +description: text
+    +type: varchar(255) <<NOT NULL>>
+}
+
+entity eam {
+    *id : integer <<PK>> <<NOT NULL>>\n<<AUTO_INCREMENT>>
+    --
+    +host_ip: decimal(10,0) <<NOT NULL>>
+    +host_name: varchar(64)
+}
+
+entity policy {
+    *id : integer <<PK>> <<NOT NULL>>\n<<AUTO_INCREMENT>>
+    --
+    +name: varchar(64) <<UNIQUE>>\n<<NOT NULL>>
+    +lunch_break_type: tinyint\nunsigned <<NOT NULL>>
+    +acceptable_lateness: tinyint\nunsigned <<NOT NULL>>
+    +acceptable_leaving_work: tinyint\nunsigned <<NOT NULL>>
+    +acceptable_schedule_violation: tinyint\nunsigned <<NOT NULL>>
+}
+
+entity role {
+    *id : integer <<PK>> <<NOT NULL>>\n<<AUTO_INCREMENT>>
+    --
+    +name: varchar(64) <<UNIQUE>>\n<<NOT NULL>>
+    +description: text
+}
+
+entity access {
+    *id : integer <<PK>> <<NOT NULL>>\n<<AUTO_INCREMENT>>
+    --
+    +name: varchar(64) <<UNIQUE>>\n<<NOT NULL>>
+    +description: text
+}
+
+entity access_assignment {
+    *role_id: integer <<PK>> <<FK>>\n<<NOT NULL>>
+    *access_id: integer <<PK>> <<FK>>\n<<NOT NULL>>
+    --
+}
+
+entity role_assignment {
+    *employee_id: integer <<PK>> <<FK>>\n<<NOT NULL>>
+    *role_id: integer <<PK>> <<FK>>\n<<NOT NULL>>
+    --
+}
+
+organization::id ||--|{ organizational_unit::organization_id
+organizational_unit::id |o-|{ organizational_unit::higher_level_id
+organizational_unit::chief_id ||-|| employee::id
+position::id ||--|{ employee::position_id
+position::unit_id }|--|| organizational_unit::id
+'employee::id ||--|{ actual_activity::employee_id
+employee::id ||--|{ scheduled_work::employee_id
+employee::id ||--|{ session::employee_id
+'actual_activity::activity_id }|--|| activity::id
+scheduled_work::activity_id }|--|| activity::id
+session::id ||--|{ actual_event::session_id
+actual_event::event_id }|--|| event::id
+application::id |o--|{ session::application_id
+eam::id ||--|{ session::eam_id
+policy::id ||--|{ employee::policy_id
+role_assignment::employee_id }|--|| employee::id
+role_assignment::role_id }|--||role::id
+access_assignment::role_id }|--|| role::id
+access_assignment::access_id }|--|| access::id
+
+@enduml
